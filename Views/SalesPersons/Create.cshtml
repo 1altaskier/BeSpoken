@@ -5,13 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+        function valid_form() {
+            if (document.getElementById("StateAbbrv").value != "") {
+                valid = true;
+            }
+            if (!valid) {
+                document.getElementById("ValidationMessage").innerHTML = "Please Select State";
+            }
+            return valid;
+        }
+</script>
+
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>SalesPerson</h4>
         <hr />
@@ -51,8 +62,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("StateAbbrv", new SelectList(ViewBag.State, "StateAbbrv", "StateName", @ViewBag.StateAbbrv), "-- Select One --", new { required = "required", onchange = "valid_form()", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                <div id="ValidationMessage" class="text-danger"></div>
             </div>
         </div>
 

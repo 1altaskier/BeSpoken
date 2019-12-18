@@ -59,6 +59,9 @@ namespace BeSpoken.Controllers
         // GET: SalesPersons/Create
         public ActionResult Create()
         {
+            // Get Dropdown Filter Option Values For States
+            ViewBag.State = db.States.ToList();
+
             ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName");
             return View();
         }
@@ -136,84 +139,88 @@ namespace BeSpoken.Controllers
             return View(salesPerson);
         }
 
-    
 
-    // GET: SalesPersons/Edit/5
-    public ActionResult Edit(int? id)
-    {
-        if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        SalesPerson salesPerson = db.SalesPersons.Find(id);
-        if (salesPerson == null)
-        {
-            return HttpNotFound();
-        }
-        ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName", salesPerson.ManagerId);
-        return View(salesPerson);
-    }
 
-    // POST: SalesPersons/Edit/5
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit([Bind(Include = "SalesPersonId,FirstName,LastName,Address,City,State,Zip,Phone,AltPhone,StartDate,TermDate,ManagerId")] SalesPerson salesPerson)
-    {
-        if (ModelState.IsValid)
+        // GET: SalesPersons/Edit/5
+        public ActionResult Edit(int? id)
         {
-            db.Entry(salesPerson).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName", salesPerson.ManagerId);
-        return View(salesPerson);
-    }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SalesPerson salesPerson = db.SalesPersons.Find(id);
+            if (salesPerson == null)
+            {
+                return HttpNotFound();
+            }
 
-    // GET: SalesPersons/Delete/5
-    public ActionResult Delete(int? id)
-    {
-        if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        SalesPerson salesPerson = db.SalesPersons.Find(id);
-        if (salesPerson == null)
-        {
-            return HttpNotFound();
-        }
-        return View(salesPerson);
-    }
+            // Get Dropdown Filter Option Values For States
+            ViewBag.State = db.States.ToList();
 
-    // POST: SalesPersons/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public ActionResult DeleteConfirmed(int id)
-    {
-        SalesPerson salesPerson = db.SalesPersons.Find(id);
-
-        try
-        {
-            db.SalesPersons.Remove(salesPerson);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        catch (Exception ex)
-        {
-            ViewBag.Message = "Error Encountered While Attempting to Delete - Msg: " + ex.Message;
-
+            ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName", salesPerson.ManagerId);
             return View(salesPerson);
         }
-    }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
+        // POST: SalesPersons/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "SalesPersonId,FirstName,LastName,Address,City,State,Zip,Phone,AltPhone,StartDate,TermDate,ManagerId")] SalesPerson salesPerson)
         {
-            db.Dispose();
+            if (ModelState.IsValid)
+            {
+                db.Entry(salesPerson).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName", salesPerson.ManagerId);
+            return View(salesPerson);
         }
-        base.Dispose(disposing);
+
+        // GET: SalesPersons/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SalesPerson salesPerson = db.SalesPersons.Find(id);
+            if (salesPerson == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salesPerson);
+        }
+
+        // POST: SalesPersons/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            SalesPerson salesPerson = db.SalesPersons.Find(id);
+
+            try
+            {
+                db.SalesPersons.Remove(salesPerson);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error Encountered While Attempting to Delete - Msg: " + ex.Message;
+
+                return View(salesPerson);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
-}
 }

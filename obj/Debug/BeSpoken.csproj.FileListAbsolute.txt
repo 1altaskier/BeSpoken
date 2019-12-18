@@ -73,7 +73,7 @@ C:\Projects\GIT Repositories\BeSpoken\BeSpoken\bin\System.Web.WebPages.Razor.xml
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\bin\Newtonsoft.Json.xml
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\bin\Antlr3.Runtime.pdb
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Projects\GIT Repositories\BeSpoken\BeSpoken\obj\Debug\BeSpoken.csprojAssemblyReference.cache
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\obj\Debug\BeSpoken.csproj.CopyComplete
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\obj\Debug\BeSpoken.dll
 C:\Projects\GIT Repositories\BeSpoken\BeSpoken\obj\Debug\BeSpoken.pdb
+C:\Projects\GIT Repositories\BeSpoken\BeSpoken\obj\Debug\BeSpoken.csprojAssemblyReference.cache
