@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BeSpoken.Models.Sale>
+
+@{
+    ViewBag.Title = "Sales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sales</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "Sales")';return false;" class="btn btn-default">New Sale</button>
+</p>
+@using (Html.BeginForm())
+{
+<p>
+    Filter by Date Range: @Html.TextBox("beginDate") @Html.TextBox("endDate")
+    <input type="submit" value="Search" />
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesDate)
+        </th>
+        <th>
+            @Html.Raw("Customer")
+        </th>
+        <th>
+            @Html.Raw("Salesperson")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                (@Html.DisplayFor(modelItem => item.Qty)) @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FirstName) @Html.DisplayFor(modelItem => item.Customer.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesPerson.FirstName) @Html.DisplayFor(modelItem => item.SalesPerson.LastName)
+            </td>
+        </tr>
+    }
+
+</table>

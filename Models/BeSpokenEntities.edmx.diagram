@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f8ea1c419c0439d9bdc5faf9f4b938a" Name="Diagram1">
+        <EntityTypeShape EntityType="BeSpokenModel.Commission" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Customer" Width="1.5" PointX="10.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Discount" Width="1.5" PointX="5.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Manager" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Product" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Qtr" Width="1.5" PointX="5.375" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.Sale" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.SalesPerson" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeSpokenModel.State" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="BeSpokenModel.FK_Commission_Qtr" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_Commission_SalesPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_Sales_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_Product_Discount" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_SalesPerson_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_Sales_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="BeSpokenModel.FK_Sales_SalesPerson" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

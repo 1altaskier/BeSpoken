@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BeSpoken.Models.Commission>
+
+@{
+    ViewBag.Title = "Employee Commissions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Employee Commissions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Salesperson")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qtr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.SalesPerson.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Amount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qtr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Year)
+    </td>
+</tr>
+}
+
+</table>

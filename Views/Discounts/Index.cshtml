@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BeSpoken.Models.Discount>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Discounts</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "Discounts")';return false;" class="btn btn-default">New Discount</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BeginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountPercentage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountPercentage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DiscountId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DiscountId })
+        </td>
+    </tr>
+}
+
+</table>

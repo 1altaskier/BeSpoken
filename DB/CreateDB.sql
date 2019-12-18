@@ -1,0 +1,278 @@
+USE [master]
+GO
+/****** Object:  Database [BeSpoken]    Script Date: 12/16/2019 5:28:49 PM ******/
+CREATE DATABASE [BeSpoken]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BeSpoken', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\BeSpoken.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'BeSpoken_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\BeSpoken_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [BeSpoken] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [BeSpoken].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [BeSpoken] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [BeSpoken] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [BeSpoken] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [BeSpoken] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [BeSpoken] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [BeSpoken] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [BeSpoken] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [BeSpoken] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [BeSpoken] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [BeSpoken] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [BeSpoken] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [BeSpoken] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [BeSpoken] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [BeSpoken] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [BeSpoken] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [BeSpoken] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [BeSpoken] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [BeSpoken] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [BeSpoken] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [BeSpoken] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [BeSpoken] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [BeSpoken] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [BeSpoken] SET RECOVERY FULL 
+GO
+ALTER DATABASE [BeSpoken] SET  MULTI_USER 
+GO
+ALTER DATABASE [BeSpoken] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [BeSpoken] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [BeSpoken] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [BeSpoken] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [BeSpoken] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'BeSpoken', N'ON'
+GO
+ALTER DATABASE [BeSpoken] SET QUERY_STORE = OFF
+GO
+USE [BeSpoken]
+GO
+/****** Object:  Table [dbo].[Commission]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Commission](
+	[CommissionId] [int] IDENTITY(1,1) NOT NULL,
+	[SalesPersonId] [int] NOT NULL,
+	[QtrId] [int] NOT NULL,
+	[Amount] [money] NOT NULL,
+ CONSTRAINT [PK_Commission] PRIMARY KEY CLUSTERED 
+(
+	[CommissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](50) NOT NULL,
+	[City] [nvarchar](50) NOT NULL,
+	[State] [nchar](2) NOT NULL,
+	[Zip] [int] NOT NULL,
+	[Phone] [nvarchar](20) NOT NULL,
+	[AltPhone] [nvarchar](20) NULL,
+	[StartDate] [date] NOT NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Discount]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Discount](
+	[DiscountId] [int] IDENTITY(1,1) NOT NULL,
+	[BeginDate] [date] NOT NULL,
+	[EndDate] [date] NOT NULL,
+	[DiscountPercentage] [int] NOT NULL,
+ CONSTRAINT [PK_Discount] PRIMARY KEY CLUSTERED 
+(
+	[DiscountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Manager]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Manager](
+	[ManagerId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Phone] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_Manager] PRIMARY KEY CLUSTERED 
+(
+	[ManagerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[ProductId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Manufacturer] [nvarchar](50) NOT NULL,
+	[Style] [nvarchar](50) NOT NULL,
+	[PurchasePrice] [money] NOT NULL,
+	[SalePrice] [money] NULL,
+	[QtyOnHand] [int] NOT NULL,
+	[CommissionPercentage] [decimal](2, 2) NOT NULL,
+	[DiscountId] [int] NOT NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Qtr]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Qtr](
+	[QtrId] [int] IDENTITY(1,1) NOT NULL,
+	[Qtr] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+ CONSTRAINT [PK_Qtr] PRIMARY KEY CLUSTERED 
+(
+	[QtrId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sales]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sales](
+	[SalesId] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[SalesPersonId] [int] NOT NULL,
+	[CustomerId] [int] NOT NULL,
+	[SalesDate] [date] NOT NULL,
+ CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED 
+(
+	[SalesId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SalesPerson]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SalesPerson](
+	[SalesPersonId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](50) NOT NULL,
+	[City] [nvarchar](50) NOT NULL,
+	[State] [nchar](2) NOT NULL,
+	[Zip] [int] NOT NULL,
+	[Phone] [nvarchar](20) NOT NULL,
+	[AltPhone] [nvarchar](20) NULL,
+	[StartDate] [date] NOT NULL,
+	[TermDate] [date] NULL,
+	[ManagerId] [int] NOT NULL,
+ CONSTRAINT [PK_SalesPerson] PRIMARY KEY CLUSTERED 
+(
+	[SalesPersonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[States]    Script Date: 12/16/2019 5:28:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[States](
+	[StateAbbrv] [nchar](2) NOT NULL,
+	[StateName] [nchar](30) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Commission]  WITH CHECK ADD  CONSTRAINT [FK_Commission_Qtr] FOREIGN KEY([QtrId])
+REFERENCES [dbo].[Qtr] ([QtrId])
+GO
+ALTER TABLE [dbo].[Commission] CHECK CONSTRAINT [FK_Commission_Qtr]
+GO
+ALTER TABLE [dbo].[Commission]  WITH CHECK ADD  CONSTRAINT [FK_Commission_SalesPerson] FOREIGN KEY([SalesPersonId])
+REFERENCES [dbo].[SalesPerson] ([SalesPersonId])
+GO
+ALTER TABLE [dbo].[Commission] CHECK CONSTRAINT [FK_Commission_SalesPerson]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Discount] FOREIGN KEY([DiscountId])
+REFERENCES [dbo].[Discount] ([DiscountId])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_Discount]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_Customer] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([CustomerId])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_Customer]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_Product] FOREIGN KEY([ProductId])
+REFERENCES [dbo].[Product] ([ProductId])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_Product]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_SalesPerson] FOREIGN KEY([SalesPersonId])
+REFERENCES [dbo].[SalesPerson] ([SalesPersonId])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_SalesPerson]
+GO
+ALTER TABLE [dbo].[SalesPerson]  WITH CHECK ADD  CONSTRAINT [FK_SalesPerson_Manager] FOREIGN KEY([ManagerId])
+REFERENCES [dbo].[Manager] ([ManagerId])
+GO
+ALTER TABLE [dbo].[SalesPerson] CHECK CONSTRAINT [FK_SalesPerson_Manager]
+GO
+USE [master]
+GO
+ALTER DATABASE [BeSpoken] SET  READ_WRITE 
+GO
