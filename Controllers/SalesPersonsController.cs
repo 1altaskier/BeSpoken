@@ -131,6 +131,8 @@ namespace BeSpoken.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ManagerId = new SelectList(db.Managers, "ManagerId", "FirstName", salesPerson.ManagerId);
+            ViewBag.State = new SelectList(db.States, "StateAbbrv", "StateName", salesPerson.State);
+
             return View(salesPerson);
         }
 
