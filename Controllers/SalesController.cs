@@ -55,6 +55,8 @@ namespace BeSpoken.Controllers
         {
             if (ModelState.IsValid)
             {
+                var enoughBikes = db.Products.SingleOrDefault(m => m.ProductId == sale.ProductId).QtyOnHand >= sale.Qty;
+
             SqlParameter param1 = new SqlParameter("@ProductId", sale.ProductId);
                 SqlParameter param2 = new SqlParameter("@SalesPersonId", sale.SalesPersonId);
                 SqlParameter param3 = new SqlParameter("@CustomerId", sale.CustomerId);
